@@ -6,11 +6,15 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float _moveForce;
     [SerializeField] private float _maxSpeed;
     [SerializeField] private ForceMode _forceMode = ForceMode.Force;
-    [SerializeField] private Rigidbody _rigidBody;
+    [SerializeField] private Rigidbody _rigidbody;
 
+    private bool _isSlowedDown;
+    private float _slownessMultiplier;
     private Vector3 _moveDirection;
     private float _horizontalInput;
     private float _verticalInput;
+
+    private const float NORMAL_SPEED_MULTIPLIER = 1f;
 
     private void Update()
     {
@@ -45,17 +49,31 @@ public class PlayerMovementController : MonoBehaviour
 
     private void ApplyMovement()
     {
+        float currentMoveForce = _moveForce;
+        currentMoveForce *= _isSlowedDown ? _slownessMultiplier : NORMAL_SPEED_MULTIPLIER;
+
         if (_moveDirection != Vector3.zero)
         {
-            _rigidBody.AddForce(_moveDirection * _moveForce, _forceMode);
+            _rigidbody.AddForce(_moveDirection * currentMoveForce, _forceMode);
         }
     }
 
     private void LimitSpeed()
     {
-        if (_rigidBody.velocity.magnitude > _maxSpeed)
+        if (_rigidbody.velocity.magnitude > _maxSpeed)
         {
-            _rigidBody.velocity = _rigidBody.velocity.normalized * _maxSpeed;
+            _rigidbody.velocity = _rigidbody.velocity.normalized * _maxSpeed;
         }
+    }
+
+    public void SlowDown(float slownessMultiplier)
+    {
+        _isSlowedDown = true;
+        _slownessMultiplier = slownessMultiplier;
+    }
+
+    public void StopSlowingDown()
+    {
+        _isSlowedDown = false;
     }
 }
