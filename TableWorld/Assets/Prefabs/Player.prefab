@@ -151,8 +151,13 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _moveForce: 10
   _maxSpeed: 8
+  _jumpForce: 5
   _forceMode: 0
   _rigidbody: {fileID: 4926658819347300520}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _groundCheckDistance: 0.2
 --- !u!114 &1658909003321416251
 MonoBehaviour:
   m_ObjectHideFlags: 0
