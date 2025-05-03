@@ -30,8 +30,9 @@ public class ShockWave : MonoBehaviour
     {
         InitializeRenderer();
         _origin = transform.position;
-        _fadeStartRadius = _maxRadius * FADE_PERCENTAGE; // Начинаем затухание на 80% радиуса
+        _fadeStartRadius = _maxRadius * FADE_PERCENTAGE;
         ClearPositions();
+        StartWave();
     }
 
     private void ClearPositions()
@@ -66,7 +67,7 @@ public class ShockWave : MonoBehaviour
         _lineRenderer.material.EnableKeyword("_ALPHABLEND_ON");
     }
 
-    public void StartWave()
+    private void StartWave()
     {
         StartCoroutine(ExpandWaveRoutine());
     }
@@ -84,6 +85,8 @@ public class ShockWave : MonoBehaviour
             _currentRadius += _expansionSpeed * Time.deltaTime;
             yield return null;
         }
+
+        Destroy(gameObject);
     }
 
     private void UpdateWaveVisual()
@@ -138,6 +141,7 @@ public class ShockWave : MonoBehaviour
     private void ApplyForceToObject(Collider hit, float hitDistance)
     {
         Rigidbody rb = hit.attachedRigidbody;
+
         if (rb != null)
         {
             Vector3 direction = (hit.transform.position - _origin).normalized;

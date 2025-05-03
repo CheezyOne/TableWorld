@@ -9,6 +9,7 @@ public class Legs : MonoBehaviour
     [SerializeField] private float _betweenStompsTimeReduction;
     [SerializeField] private float _absoluteLowestBetweenStompsTime;
     [SerializeField] private Transform _legs;
+    [SerializeField] private Transform _stompingPoint;
     [SerializeField] private Transform _upperStompingPoint;
     [SerializeField] private ShockWave _shockWave;
     [SerializeField] private float _liftingLegsTime;
@@ -39,7 +40,7 @@ public class Legs : MonoBehaviour
     private void OnStomp()
     {
         EventBus.OnStomp?.Invoke();
-        _shockWave.StartWave();
+        Instantiate(_shockWave, _stompingPoint.position, Quaternion.identity);
     }
 
     private float GetBetweenStompsTime()

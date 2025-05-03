@@ -13,6 +13,7 @@ public enum SoundType
     BalloonsMatch,
     DirtySpot,
     GameStart,
+    MousetrapHit,
 }
 
 public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
@@ -24,7 +25,7 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
     [SerializeField] private Image _musicImage;
     [SerializeField] private Image _soundsImage;
     [SerializeField] private SoundsData[] _soundsDatas;
-    [SerializeField] private GameObject _musicObject;
+    [SerializeField] private AudioSource _musicObject;
     private Dictionary<SoundType, AudioClipData> _soundIdPairs = new();
 
     private bool _isSoundOn = true;
@@ -44,8 +45,8 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
 
     public void ToggleMusic()
     {
-        _musicObject.SetActive(!_musicObject.activeSelf);
-        _musicImage.sprite = _musicObject.activeSelf ? _musicOn : _musicOff;
+        _musicObject.gameObject.SetActive(!_musicObject.gameObject.activeSelf);
+        _musicImage.sprite = _musicObject.gameObject.activeSelf ? _musicOn : _musicOff;
     }
 
     public void PlaySound(SoundType soundType)

@@ -11,6 +11,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _groundCheckDistance = 0.2f;
 
+    private bool _isAbleToMove = true;
     private bool _isSlowedDown;
     private bool _isGrounded;
     private float _slownessMultiplier;
@@ -24,6 +25,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update()
     {
+        if (!_isAbleToMove)
+            return;
+
         GetInput();
         CheckGround();
     }
@@ -109,4 +113,20 @@ public class PlayerMovementController : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * _groundCheckDistance);
     }
 #endif
+
+    private void OnGameEnd()
+    {
+        _rigidbody.isKinematic = true;
+        _isAbleToMove = false;
+    }
+
+    private void OnEnable()
+    {
+        EventBus.OnGameEnd += OnGameEnd;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.OnGameEnd -= OnGameEnd;
+    }
 }
