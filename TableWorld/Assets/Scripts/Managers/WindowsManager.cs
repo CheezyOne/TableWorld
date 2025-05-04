@@ -35,6 +35,7 @@ public class WindowsManager : Singleton<WindowsManager>
         _openedWindows.Remove(window);
         window.OnClose();
         Destroy(window.gameObject);
+        EventBus.OnWindowClosed?.Invoke();
     }
 
     public bool IsOpened(Type type)

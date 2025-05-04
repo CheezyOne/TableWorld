@@ -11,29 +11,40 @@ public class MiceSpawner : MonoBehaviour
     [SerializeField] private float _absoluteLowestTrainMiceTime;
     [SerializeField] private BorderPair[] _borderPairs;
 
+    [SerializeField] private Transform _player;
     [SerializeField] private TrainMouse _trainMouse;
+    [SerializeField] private NormalMouse _normalMouse;
+    [SerializeField] private int _levelsForNormalMouse;
 
     private void Awake()
     {
         StartCoroutine(TrainMiceSpawnRoutine());
+        SpawnNormalMice();
+    }
+
+    private void SpawnNormalMice()
+    {
+        int miceAmount = 1 + (GameInfoHolder.Level / _levelsForNormalMouse);
+
+        for(int i = 0;i<miceAmount;i++)
+        {
+            int borderPairIndex = Random.Range(0, _borderPairs.Length);
+            Instantiate(_normalMouse, _borderPairs[borderPairIndex].GetRandomPoint(), Quaternion.Euler(_borderPairs[borderPairIndex].Rotation)).SetPlayer(_player);
+        }
     }
 
     private IEnumerator TrainMiceSpawnRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(GetBetweenStompsTime());
-            SpawnTrainMouse();
+            yield return new WaitForSeconds(GetBetweenMiceTime());
+            int borderPairIndex = Random.Range(0, _borderPairs.Length);
+            Instantiate(_trainMouse, _borderPairs[borderPairIndex].GetRandomPoint(), Quaternion.Euler(_borderPairs[borderPairIndex].Rotation));
         }
     }
 
-    private void SpawnTrainMouse()
-    {
-        int borderPairIndex = Random.Range(0, _borderPairs.Length);
-        Instantiate(_trainMouse, _borderPairs[borderPairIndex].GetRandomPoint(),Quaternion.Euler(_borderPairs[borderPairIndex].Rotation));
-    }
 
-    private float GetBetweenStompsTime()
+    private float GetBetweenMiceTime()
     {
         float reductedTime = _maxTrainMiceTime - _trainMiceTimeReduction * GameInfoHolder.Level;
         float betweenStompsTime = reductedTime < _minTrainMiceTime ? Random.Range(_absoluteLowestTrainMiceTime, _minTrainMiceTime) : Random.Range(_minTrainMiceTime, reductedTime);
