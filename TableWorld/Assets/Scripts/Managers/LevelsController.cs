@@ -21,6 +21,14 @@ public class LevelsController : Singleton<LevelsController>
 
 public static class GameInfoHolder
 {
+    public static int Decoys = 10;
     public static int Level;
     public static float CurrentHP = 100f;
+
+    public static void ResetData()
+    {
+        Decoys = 10;
+        Level = 0;
+        CurrentHP = 100f;
+    }
 }
