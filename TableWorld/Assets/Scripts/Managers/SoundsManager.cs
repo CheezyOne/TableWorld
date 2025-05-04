@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public enum SoundType
 {
     Button,
-    Lose,
-    FindAHand,
-    RatHit,
-    BalloonsMatch,
+    CupBreak,
+    Victory,
+    TrainMouseSpawn,
+    MouseHit,
     DirtySpot,
-    GameStart,
+    Stomp,
     MousetrapHit,
 }
 

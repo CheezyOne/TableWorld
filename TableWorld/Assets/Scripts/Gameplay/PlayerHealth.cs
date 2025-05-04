@@ -43,8 +43,8 @@ public class PlayerHealth : MonoBehaviour
     {
         Destroy(Instantiate(_deathEffect, transform.position, Quaternion.identity), _deathEffectLifetime);
         WindowsManager.Instance.OpenWindow(_loseWindow);
-        GameInfoHolder.CurrentHP = 100f;
         gameObject.SetActive(false);
+        GameInfoHolder.ResetData();
     }
 
     private void BecameInvinsible() => _isInvincible = true;

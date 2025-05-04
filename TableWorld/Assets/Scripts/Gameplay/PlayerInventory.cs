@@ -1,17 +1,16 @@
 using UnityEngine;
 using TMPro;
 
-public class PlayerIntentory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private Transform _playerCamera;
     [SerializeField] private Decoy _decoy;
     [SerializeField] private TMP_Text _decoyAmountText;
-    [SerializeField] private int _decoyAmount;
     [SerializeField] private float _decoyThrowForce;
 
     private void Awake()
     {
-        _decoyAmountText.text = _decoyAmount.ToString();
+        _decoyAmountText.text = GameInfoHolder.Decoys.ToString();
     }
 
     private void Update()
@@ -22,18 +21,18 @@ public class PlayerIntentory : MonoBehaviour
 
     private void ThrowDecoy()
     {
-        if (_decoyAmount <= 0)
+        if (GameInfoHolder.Decoys <= 0)
             return;
 
-        _decoyAmount--;
-        _decoyAmountText.text = _decoyAmount.ToString();
+        GameInfoHolder.Decoys--;
+        _decoyAmountText.text = GameInfoHolder.Decoys.ToString();
         Decoy newDecoy = Instantiate(_decoy, transform.position + _playerCamera.forward, Quaternion.identity);
         newDecoy.Rigidbody.AddForce((_playerCamera.forward + _playerCamera.up / 2) * _decoyThrowForce, ForceMode.Impulse);
     }
 
     public void AddDecoy()
     {
-        _decoyAmount++;
-        _decoyAmountText.text = _decoyAmount.ToString();
+        GameInfoHolder.Decoys++;
+        _decoyAmountText.text = GameInfoHolder.Decoys.ToString();
     }
 }
