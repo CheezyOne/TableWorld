@@ -53,10 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 5875890008856011303}
   _credits:
-  - 'Scripts: Cheezy one'
   - 'Game design: Cheezy one'
+  - 'Scripts: Cheezy one'
   - 'Sounds and music: Cheezy one'
   - 'Animations: Bepis and Cheezy one'
+  - 'Ideas : Cheezy one and Bepis'
   - '3D models: Bepis'
   - This game was made specifically for Curdle Gamejam
   _spawnPoint: {fileID: 9197010006485801473}
