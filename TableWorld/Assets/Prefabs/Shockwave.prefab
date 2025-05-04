@@ -54,4 +54,4 @@ MonoBehaviour:
   _maxForce: 50
   _forceFalloff: 1.5
   _forceMode: 1
-  _playerDamage: 5
+  _playerDamage: 20

@@ -9,7 +9,6 @@ public class DirtySpot : MonoBehaviour
     {
         if(other.TryGetComponent(out PlayerHealth playerHealth))
         {
-            SoundsManager.Instance.PlaySound(SoundType.DirtySpot);
             playerHealth.TakeDamage(_tickDamage);
         }
     }
@@ -18,6 +17,7 @@ public class DirtySpot : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerMovementController playerMovementController))
         {
+            SoundsManager.Instance.PlaySound(SoundType.DirtySpot);
             playerMovementController.SlowDown(_slownessMultiplier);
         }
     }

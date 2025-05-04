@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Arm : MonoBehaviour
 {
+    [SerializeField] private string _playerTag;
+
     private void OnTriggerEnter(Collider other)
     {
-        print("Ping");
-        //!if (other.GetComponent<PlayerHealth>() == null)
-          //!  return;
-
-        LevelsController.Instance.CompleteLevel();
+        if (other.CompareTag(_playerTag))
+            LevelsController.Instance.CompleteLevel();
     }
 }

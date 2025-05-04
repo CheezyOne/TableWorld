@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum SoundType
 {
@@ -11,6 +10,7 @@ public enum SoundType
     Victory,
     TrainMouseSpawn,
     MouseHit,
+    MouseGotHit,
     DirtySpot,
     Stomp,
     MousetrapHit,
@@ -18,12 +18,6 @@ public enum SoundType
 
 public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
 {
-    [SerializeField] private Sprite _soundsOff;
-    [SerializeField] private Sprite _soundsOn;
-    [SerializeField] private Sprite _musicOn;
-    [SerializeField] private Sprite _musicOff;
-    [SerializeField] private Image _musicImage;
-    [SerializeField] private Image _soundsImage;
     [SerializeField] private SoundsData[] _soundsDatas;
     [SerializeField] private AudioSource _musicObject;
     private Dictionary<SoundType, AudioClipData> _soundIdPairs = new();
@@ -40,13 +34,11 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
     public void ToggleSounds()
     {
         _isSoundOn = !_isSoundOn;
-        _soundsImage.sprite = _isSoundOn? _soundsOn : _soundsOff;
     }
 
     public void ToggleMusic()
     {
         _musicObject.gameObject.SetActive(!_musicObject.gameObject.activeSelf);
-        _musicImage.sprite = _musicObject.gameObject.activeSelf ? _musicOn : _musicOff;
     }
 
     public void PlaySound(SoundType soundType)
@@ -72,6 +64,18 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
     {
         yield return _waitForCoolDown;
         _soundIdPairs[soundType].IsOnCooldown = false;
+    }
+
+    private void OnEnable()
+    {
+        EventBus.OnSoundsToggle += ToggleSounds;
+        EventBus.OnMusicToggle += ToggleMusic;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.OnSoundsToggle -= ToggleSounds;
+        EventBus.OnMusicToggle -= ToggleMusic;
     }
 
     [Serializable]

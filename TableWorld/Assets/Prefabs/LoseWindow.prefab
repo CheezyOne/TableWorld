@@ -362,7 +362,7 @@ MonoBehaviour:
   _closeButton: {fileID: 8290817230057773395}
   _scoreText: {fileID: 6384099159207575430}
   _score: 'Score:'
-  _levelScoreMultiplier: 10
+  _levelScoreMultiplier: 100
 --- !u!1 &5298467292925736025
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 1125509660435797504}
   - component: {fileID: 3004984863735861035}
   - component: {fileID: 390594876328334979}
+  - component: {fileID: 4987311619115391738}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -499,6 +500,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4987311619115391738}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1125509660435797504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +555,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneName: Menu
+--- !u!114 &4987311619115391738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298467292925736025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9edd0de66eed6c43852c1c6c465b2be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6329999106851332270
 GameObject:
   m_ObjectHideFlags: 0

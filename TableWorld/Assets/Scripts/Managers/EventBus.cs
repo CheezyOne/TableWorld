@@ -5,4 +5,7 @@ public static class EventBus
     public static Action OnStomp;
     public static Action OnGameEnd;
     public static Action OnWindowClosed;
+
+    public static Action OnSoundsToggle;
+    public static Action OnMusicToggle;
 }

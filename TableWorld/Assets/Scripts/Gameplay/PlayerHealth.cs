@@ -42,6 +42,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Destroy(Instantiate(_deathEffect, transform.position, Quaternion.identity), _deathEffectLifetime);
+        SoundsManager.Instance.PlaySound(SoundType.CupBreak);
         WindowsManager.Instance.OpenWindow(_loseWindow);
         gameObject.SetActive(false);
         GameInfoHolder.ResetData();

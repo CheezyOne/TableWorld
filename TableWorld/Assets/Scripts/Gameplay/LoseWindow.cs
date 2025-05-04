@@ -15,7 +15,7 @@ public class LoseWindow : BaseWindow
 
     private string GetFinalScore()
     {
-        string score = (GameInfoHolder.Level * _levelScoreMultiplier + (int)TimerController.Instance.TimeLeft).ToString();
+        string score = (GameInfoHolder.Level * _levelScoreMultiplier + (int)TimerController.Instance.GetPassedTime()).ToString();
         return score;
     }
 }

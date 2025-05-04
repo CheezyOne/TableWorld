@@ -4,6 +4,7 @@ using System.Collections;
 
 public class NormalMouse : Mouse
 {
+    [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _minRandomTargetTime;
     [SerializeField] private float _maxRandomTargetTime;
@@ -86,6 +87,7 @@ public class NormalMouse : Mouse
 
     public override void GetStunned()
     {
+        _animator.enabled = false;
         _isStunned = true;
         _agent.enabled = false;
         StunRotate();
@@ -93,6 +95,7 @@ public class NormalMouse : Mouse
 
     public override void OnStunEnd()
     {
+        _animator.enabled = true;
         _agent.enabled = true;
         _isStunned = false;
     }

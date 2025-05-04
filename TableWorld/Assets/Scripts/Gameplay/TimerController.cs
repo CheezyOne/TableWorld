@@ -10,30 +10,29 @@ public class TimerController : Singleton<TimerController>
     [SerializeField] private string _runToHandText;
     [SerializeField] private float _timerScaleMultiplier;
     [SerializeField] private float _timerScaleTime;
-
-#if UNITY_EDITOR
-    [SerializeField] private float _testTime;
-#endif
+    [SerializeField] private float _firstLevelTime;
+    [SerializeField] private float _levelEncreaseTime;
 
     private float _timeLeft;
     private bool _isPlaying;
 
     public float TimeLeft => _timeLeft;
 
-#if UNITY_EDITOR
-    private void Start()
+    protected override void Awake()
     {
-        if (_testTime == 0)
-            return;
-
-        StartTimer(_testTime);
+        base.Awake();
+        StartTimer(_firstLevelTime + GameInfoHolder.Level * _levelEncreaseTime);
     }
-#endif
 
-    public void StartTimer(float time)
+    private void StartTimer(float time)
     {
         _timeLeft = time;
         _isPlaying = true;
+    }
+
+    public float GetPassedTime()
+    {
+        return _firstLevelTime + GameInfoHolder.Level * _levelEncreaseTime - _timeLeft;
     }
 
     private void Update()

@@ -3,11 +3,13 @@ using DG.Tweening;
 
 public class TrainMouse : Mouse
 {
+    [SerializeField] private Animator _animator;
     [SerializeField] private float _travelTime;
     [SerializeField] private float _distanceToTravel;
 
     private void Awake()
     {
+        SoundsManager.Instance.PlaySound(SoundType.TrainMouseSpawn);
         TrainRun();
     }
 
@@ -20,10 +22,12 @@ public class TrainMouse : Mouse
     {
         transform.DOKill();
         StunRotate();
+        _animator.enabled= false;
     }
 
     public override void OnStunEnd()
     {
+        _animator.enabled = true;
         TrainRun();
     }
 }

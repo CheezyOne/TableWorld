@@ -17,6 +17,7 @@ public class Mouse : MonoBehaviour
             playerHealth.TakeDamage(_damage);
             Vector3 direction = (collision.transform.position - transform.position).normalized;
             direction.y = 0;
+            SoundsManager.Instance.PlaySound(SoundType.MouseHit);
             collision.rigidbody.AddForce(direction * _pushForce, _pushForceMode);
         }
     }

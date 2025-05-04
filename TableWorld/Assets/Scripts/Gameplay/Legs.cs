@@ -40,6 +40,7 @@ public class Legs : MonoBehaviour
     private void OnStomp()
     {
         EventBus.OnStomp?.Invoke();
+        SoundsManager.Instance.PlaySound(SoundType.Stomp);
         Instantiate(_shockWave, _stompingPoint.position, Quaternion.identity);
     }
 
