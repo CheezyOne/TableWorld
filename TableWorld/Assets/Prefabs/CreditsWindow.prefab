@@ -59,7 +59,6 @@ MonoBehaviour:
   - 'Animations: Bepis and Cheezy one'
   - 'Ideas : Cheezy one and Bepis'
   - '3D models: Bepis'
-  - This game was made specifically for Curdle Gamejam
   _spawnPoint: {fileID: 9197010006485801473}
   _spawnDelay: 1.5
   _movingCredit: {fileID: 7414029264571711580, guid: 8effc0338feaa274a874b08f5fd14ef7, type: 3}

@@ -9,20 +9,21 @@ public class ShockWave : MonoBehaviour
     [SerializeField] private float _maxRadius = 15f;
     [SerializeField] private float _waveWidth = 0.5f;
     [SerializeField] private LayerMask _detectionLayer;
-    [SerializeField] private Color _waveColor = Color.red;
+    [SerializeField] private Material _waveMaterial;
+    [SerializeField] private float _emissionIntensity = 2f;
 
     [Header("Physics Settings")]
     [SerializeField] private float _maxForce = 10f;
     [SerializeField] private float _forceFalloff = 1.5f;
     [SerializeField] private ForceMode _forceMode = ForceMode.Impulse;
     [SerializeField] private float _playerDamage;
+    [SerializeField] private LineRenderer _lineRenderer;
 
-    private LineRenderer _lineRenderer;
     private HashSet<Collider> _hitObjects = new HashSet<Collider>();
     private float _currentRadius;
     private Vector3 _origin;
     private float _fadeStartRadius;
-    private Material _waveMaterial;
+    private Material _fadeMaterial;
 
     private const float FADE_PERCENTAGE = 0.8f;
 
@@ -49,22 +50,27 @@ public class ShockWave : MonoBehaviour
 
     private void InitializeRenderer()
     {
-        _lineRenderer = gameObject.AddComponent<LineRenderer>();
-
-        // Используем шейдер, поддерживающий прозрачность
-        _waveMaterial = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended"));
-        _waveMaterial.color = _waveColor;
-
-        _lineRenderer.material = _waveMaterial;
+        _fadeMaterial = new Material(_waveMaterial);
+        _lineRenderer.material = _fadeMaterial;
         _lineRenderer.startWidth = _waveWidth;
         _lineRenderer.endWidth = _waveWidth;
         _lineRenderer.loop = true;
         _lineRenderer.positionCount = 128;
+        _lineRenderer.enabled = true;
 
-        // Включаем поддержку прозрачности
-        _lineRenderer.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        _lineRenderer.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        _lineRenderer.material.EnableKeyword("_ALPHABLEND_ON");
+        _fadeMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        _fadeMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        _fadeMaterial.EnableKeyword("_ALPHABLEND_ON");
+        _fadeMaterial.EnableKeyword("_EMISSION");
+
+        Color baseColor = _fadeMaterial.color;
+        Color emissionColor = new Color(
+            Mathf.Clamp(baseColor.r * _emissionIntensity, 0, 1),
+            Mathf.Clamp(baseColor.g * _emissionIntensity, 0, 1),
+            Mathf.Clamp(baseColor.b * _emissionIntensity, 0, 1)
+        );
+        _fadeMaterial.SetColor("_EmissionColor", emissionColor);
+        _fadeMaterial.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
     }
 
     private void StartWave()
@@ -145,38 +151,44 @@ public class ShockWave : MonoBehaviour
         if (rb != null)
         {
             Vector3 direction = (hit.transform.position - _origin).normalized;
-            direction.y = 0; // Оставляем только горизонтальное отталкивание
-
-            // Рассчитываем силу с учетом расстояния (обратная пропорция)
+            direction.y = 0; 
             float forceMultiplier = Mathf.Pow(1 - (hitDistance / _maxRadius), _forceFalloff);
             float appliedForce = _maxForce * forceMultiplier;
-
             rb.AddForce(direction * appliedForce, _forceMode);
         }
     }
 
     private void UpdateFadeEffect()
     {
+        float alpha = 1f;
+
         if (_currentRadius >= _fadeStartRadius)
         {
             float fadeProgress = (_currentRadius - _fadeStartRadius) / (_maxRadius - _fadeStartRadius);
-            float alpha = Mathf.Lerp(1f, 0f, fadeProgress);
+            alpha = Mathf.Lerp(1f, 0f, fadeProgress);
+        }
 
-            // Обновляем только альфа-канал, сохраняя цвет
-            Color fadedColor = new Color(
-                _waveColor.r,
-                _waveColor.g,
-                _waveColor.b,
-                alpha
-            );
+        Color fadedColor = new Color(
+            _fadeMaterial.color.r,
+            _fadeMaterial.color.g,
+            _fadeMaterial.color.b,
+            alpha
+        );
 
-            // Применяем ко всем свойствам материала
-            _waveMaterial.color = fadedColor;
-            _lineRenderer.startColor = fadedColor;
-            _lineRenderer.endColor = fadedColor;
+        Color emissionColor = new Color(
+            Mathf.Clamp(_fadeMaterial.color.r * _emissionIntensity, 0, 1),
+            Mathf.Clamp(_fadeMaterial.color.g * _emissionIntensity, 0, 1),
+            Mathf.Clamp(_fadeMaterial.color.b * _emissionIntensity, 0, 1)
+        ) * alpha;
 
-            // Явно обновляем материал
-            _lineRenderer.sharedMaterial = _waveMaterial;
+        _fadeMaterial.color = fadedColor;
+        _fadeMaterial.SetColor("_EmissionColor", emissionColor);
+        _lineRenderer.startColor = fadedColor;
+        _lineRenderer.endColor = fadedColor;
+
+        if (_fadeMaterial.HasProperty("_EmissionIntensity"))
+        {
+            _fadeMaterial.SetFloat("_EmissionIntensity", _emissionIntensity * alpha);
         }
     }
 }

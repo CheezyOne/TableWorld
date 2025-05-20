@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 422805381735403568}
   - component: {fileID: 1658909003321416251}
   - component: {fileID: 8420197883587109927}
-  - component: {fileID: 3315193833034949754}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -107,7 +106,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -192,28 +191,6 @@ MonoBehaviour:
   _decoy: {fileID: 612898832894406398, guid: 72ee29722e5629244bf8f5e79ad1b6f3, type: 3}
   _decoyAmountText: {fileID: 0}
   _decoyThrowForce: 6
---- !u!64 &3315193833034949754
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8967275623355952186}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2124705421725058983, guid: 2901cbd2f0d9514548306f4ab4365d44, type: 3}
 --- !u!1001 &588461142670921174
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -79,9 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minBetweenStompsTime: 10
-  _maxBetweenStompsTime: 30
+  _maxBetweenStompsTime: 10
   _betweenStompsTimeReduction: 1
-  _absoluteLowestBetweenStompsTime: 5
+  _absoluteLowestBetweenStompsTime: 10
   _legs: {fileID: 5821666052216065676}
   _stompingPoint: {fileID: 2663993422588049228}
   _upperStompingPoint: {fileID: 4392241095159100287}

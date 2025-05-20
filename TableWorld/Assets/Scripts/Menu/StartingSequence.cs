@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 
 public class StartingSequence : MonoBehaviour
 {
@@ -9,17 +8,38 @@ public class StartingSequence : MonoBehaviour
     [SerializeField] private float _armMovementTime;
     [SerializeField] private Ease _armEase;
     [SerializeField] private LoadScene _loadScene;
-    [SerializeField] private float _timeBeforeLoadScene;
+    [SerializeField] private Vector3 _cupForce;
+    [SerializeField] private ConstantForce _forceComponent;
+    [SerializeField] private string _playerTag;
 
     public void OnPlayButton()
     {
         _arm.DOMove(_armTarget.position,_armMovementTime).SetEase(_armEase);
-        StartCoroutine(LoadScene());
     }
 
-    private IEnumerator LoadScene()
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(_timeBeforeLoadScene);
+        if (other.CompareTag(_playerTag))
+            LoadScene();
+    }
+
+    private void LoadScene()
+    {
         _loadScene.LoadTheScene();
+    }
+
+    private void ApplyCupForce()
+    {
+        _forceComponent.force = _cupForce;
+    }
+
+    private void OnEnable()
+    {
+        EventBus.OnMenuCupHit += ApplyCupForce;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.OnMenuCupHit -= ApplyCupForce;
     }
 }
