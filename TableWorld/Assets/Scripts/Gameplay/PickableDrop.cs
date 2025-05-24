@@ -9,6 +9,7 @@ public class PickableDrop : PickableObject
         if (other.TryGetComponent(out PlayerHealth playerHealth))
         {
             playerHealth.GetHealed(_healAmount);
+            SoundsManager.Instance.PlaySound(SoundType.WaterDropPickUp);
             PickedUpEffect();
         }
     }

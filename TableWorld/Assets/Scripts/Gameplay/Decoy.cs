@@ -1,13 +1,16 @@
+using System;
+using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class Decoy : MonoBehaviour
 {
     [SerializeField] private float _decoyRadius;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private int _maxActivations;
 
+    private WaitForSeconds _activationIntervalWait = new(0.5f);
+    private int _activationCount;
     private bool _isActivated;
-    private List<GameObject> _foundMice = new();
 
     public Rigidbody Rigidbody => _rigidbody;
 
@@ -22,24 +25,42 @@ public class Decoy : MonoBehaviour
 
     private void BecomeActive()
     {
-        bool foundMouse = false;
         _rigidbody.isKinematic = true;
         Collider[] colliders = Physics.OverlapSphere(transform.position, _decoyRadius);
+
+        Array.Sort(colliders, (a, b) =>
+            Vector3.Distance(transform.position, a.transform.position)
+            .CompareTo(
+                Vector3.Distance(transform.position, b.transform.position)
+            )
+        );
 
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent(out NormalMouse normalMouse))
             {
-                if (_foundMice.Contains(normalMouse.gameObject))
+                if (normalMouse.IsEating)
                     continue;
 
-                _foundMice.Add(normalMouse.gameObject);
-                foundMouse = true;
-                normalMouse.SetTemporalTarget(transform);
+                StopAllCoroutines();
+                normalMouse.SetDecoyTarget(transform);
+                return;
             }
         }
 
-        if (!foundMouse)
+
+        if (_activationCount > _maxActivations)
+        {
             Destroy(gameObject);
+        }
+
+        _activationCount++;
+        StartCoroutine(BeActiveRoutine());
+    }
+
+    private IEnumerator BeActiveRoutine()
+    {
+        yield return _activationIntervalWait;
+        BecomeActive();
     }
 }

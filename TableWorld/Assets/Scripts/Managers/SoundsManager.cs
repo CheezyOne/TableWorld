@@ -14,6 +14,9 @@ public enum SoundType
     DirtySpot,
     Stomp,
     MousetrapHit,
+    WaterDropPickUp,
+    DecoyPickUp,
+    DecoyThrow,
 }
 
 public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
@@ -22,18 +25,12 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
     [SerializeField] private AudioSource _musicObject;
     private Dictionary<SoundType, AudioClipData> _soundIdPairs = new();
 
-    private bool _isSoundOn = true;
-    private WaitForSeconds _waitForCoolDown = new (0.1f);
+    private WaitForSecondsRealtime _waitForCoolDown = new (0.1f);
 
     private void Start()
     {
         foreach (SoundsData soundData in _soundsDatas)
             _soundIdPairs.Add(soundData.SoundType, soundData.AudioClipData);
-    }
-
-    public void ToggleSounds()
-    {
-        _isSoundOn = !_isSoundOn;
     }
 
     public void ToggleMusic()
@@ -43,7 +40,7 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
 
     public void PlaySound(SoundType soundType)
     {
-        if (!_isSoundOn)
+        if (!SaveLoadSystem.data.SoundsOn)
             return;
 
         if(!_soundIdPairs.ContainsKey(soundType))
@@ -68,13 +65,11 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
 
     private void OnEnable()
     {
-        EventBus.OnSoundsToggle += ToggleSounds;
         EventBus.OnMusicToggle += ToggleMusic;
     }
 
     private void OnDisable()
     {
-        EventBus.OnSoundsToggle -= ToggleSounds;
         EventBus.OnMusicToggle -= ToggleMusic;
     }
 

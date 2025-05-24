@@ -7,6 +7,7 @@ public class PickableDecoy : PickableObject
         if (other.TryGetComponent(out PlayerInventory playerInventory))
         {
             playerInventory.AddDecoy();
+            SoundsManager.Instance.PlaySound(SoundType.DecoyPickUp);
             PickedUpEffect();
         }
     }

@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
+  m_sharedMaterial: {fileID: -8086153954775784357, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 5895856278615955963}
   - component: {fileID: 3489333390724711242}
   - component: {fileID: 743061288164021310}
+  - component: {fileID: 8481636623198305021}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -199,10 +200,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: "\u0418\u0433\u0440\u0430\u0442\u044C \u0435\u0449\u0451"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
+  m_sharedMaterial: {fileID: -8086153954775784357, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.65
+  m_fontSize: 54.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -268,6 +269,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8481636623198305021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4749472664689444024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e4731120b11a14dabb9a554dfb49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translates:
+  - SystemLanguage: 0
+    text: "\u0418\u0433\u0440\u0430\u0442\u044C \u0435\u0449\u0451"
+  - SystemLanguage: 1
+    text: Restart
+  text: {fileID: 743061288164021310}
 --- !u!1 &4944876372280124101
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 8290817230057773395}
   _scoreText: {fileID: 6384099159207575430}
-  _score: 'Score:'
   _levelScoreMultiplier: 100
 --- !u!1 &5298467292925736025
 GameObject:
@@ -578,6 +596,7 @@ GameObject:
   - component: {fileID: 7963015733848047435}
   - component: {fileID: 3383551226950397962}
   - component: {fileID: 9065066560813473623}
+  - component: {fileID: 4350222266432631420}
   m_Layer: 5
   m_Name: GameOverText
   m_TagString: Untagged
@@ -632,10 +651,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME OVER!
+  m_text: "\u041F\u041E\u0420\u0410\u0416\u0415\u041D\u0418\u0415!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
+  m_sharedMaterial: {fileID: -8086153954775784357, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -659,7 +678,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.85
+  m_fontSize: 52.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -701,3 +720,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4350222266432631420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329999106851332270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e4731120b11a14dabb9a554dfb49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translates:
+  - SystemLanguage: 0
+    text: "\u041F\u041E\u0420\u0410\u0416\u0415\u041D\u0418\u0415!"
+  - SystemLanguage: 1
+    text: GAME OVER!
+  text: {fileID: 9065066560813473623}

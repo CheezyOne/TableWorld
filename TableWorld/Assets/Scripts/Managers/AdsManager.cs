@@ -16,6 +16,11 @@ public class AdsManager : SingletonDontDestroyOnLoad<AdsManager>
 
     [DllImport("__Internal")]
     private static extern void ShowRVAd();
+    [DllImport("__Internal")]
+    private static extern void ShowBannerAd();
+
+    [DllImport("__Internal")]
+    private static extern void HideBannerAd();
 
     private const float FULLSCREEN_AD_DELAY = 33f;
 
@@ -32,6 +37,9 @@ public class AdsManager : SingletonDontDestroyOnLoad<AdsManager>
     [SerializeField] private float _adInEditorTime;
 #endif
 
+    [SerializeField] private AudioSource[] _allAudioSources;
+    private bool _isPausedByAd = false;
+
     private void Start()
     {
 #if UNITY_EDITOR
@@ -42,6 +50,66 @@ public class AdsManager : SingletonDontDestroyOnLoad<AdsManager>
         }
 #endif
         ResetTimer();
+    }
+
+    private void PauseAllAudio()
+    {
+        foreach (var audioSource in _allAudioSources)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Pause();
+            }
+        }
+    }
+
+    private void UnpauseAllAudio()
+    {
+        foreach (var audioSource in _allAudioSources)
+        {
+            audioSource.UnPause();
+        }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus && !_isPausedByAd)
+        {
+            StopGame();
+            PauseAllAudio();
+        }
+        else if (hasFocus && !_isPausedByAd)
+        {
+            ResumeGame();
+            UnpauseAllAudio();
+        }
+    }
+
+    public void OnInterAdOpen()
+    {
+        _isPausedByAd = true;
+        StopGame();
+        PauseAllAudio();
+    }
+
+    public void OnInterAdClose()
+    {
+        _isPausedByAd = false;
+        ResumeGame();
+        UnpauseAllAudio();
+        ResetTimer();
+    }
+
+    public void OnBannerAdShown()
+    {
+        IsShowingBannerAd = true;
+        EventBus.OnBannerAdShown?.Invoke();
+    }
+
+    public void OnBannerAdHidden()
+    {
+        IsShowingBannerAd = false;
+        EventBus.OnBannerAdHidden?.Invoke();
     }
 
     public void ShowRewarded(RewardType reward)
@@ -95,8 +163,10 @@ public class AdsManager : SingletonDontDestroyOnLoad<AdsManager>
     {
         Debug.Log("Showing inter ad");
         StopGame();
+        PauseAllAudio();
         yield return new WaitForSecondsRealtime(_adInEditorTime);
         ResumeGame();
+        UnpauseAllAudio();
         Debug.Log("Inter ad shown");
     }
 
@@ -138,17 +208,6 @@ public class AdsManager : SingletonDontDestroyOnLoad<AdsManager>
     public void ResumeGame()
     {
         Time.timeScale = 1;
-    }
-
-    public void OnInterAdOpen()
-    {
-        StopGame();
-    }
-
-    public void OnInterAdClose()
-    {
-        ResumeGame();
-        ResetTimer();
     }
 
     public static bool IsWebGL()

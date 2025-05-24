@@ -21,7 +21,7 @@ public class MousetrapsSpawner : MonoBehaviour
     {
         while (true)
         {
-            float spawnTime = _initialSpawnTime - GameInfoHolder.Level * _decreaseSpawnTime;
+            float spawnTime = _initialSpawnTime - SaveLoadSystem.data.Level * _decreaseSpawnTime;
             spawnTime = Mathf.Max(spawnTime, _absoluteMinimumTime);
             yield return new WaitForSeconds(spawnTime);
             Vector3 newSpotPosition = FindValidPosition();

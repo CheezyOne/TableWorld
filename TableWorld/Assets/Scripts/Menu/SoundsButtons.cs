@@ -10,23 +10,25 @@ public class SoundsButtons : MonoBehaviour
     [SerializeField] private Image _musicImage;
     [SerializeField] private Image _soundsImage;
 
-    private void Awake()
+    public void Initialize()
     {
-        _soundsImage.sprite = GameInfoHolder.SoundOn ? _soundsOn : _soundsOff;
-        _musicImage.sprite = GameInfoHolder.MusicOn ? _musicOn : _musicOff;
+        _soundsImage.sprite = SaveLoadSystem.data.SoundsOn ? _soundsOn : _soundsOff;
+        _musicImage.sprite = SaveLoadSystem.data.MusicOn ? _musicOn : _musicOff;
     }
 
     public void ToggleMusic()
     {
-        GameInfoHolder.MusicOn = !GameInfoHolder.MusicOn;
-        _musicImage.sprite = GameInfoHolder.MusicOn ? _musicOn : _musicOff;
+        SaveLoadSystem.data.MusicOn = !SaveLoadSystem.data.MusicOn;
+        SaveLoadSystem.Instance.Save();
+        _musicImage.sprite = SaveLoadSystem.data.MusicOn ? _musicOn : _musicOff;
         EventBus.OnMusicToggle?.Invoke();
     }
 
     public void ToggleSounds()
     {
-        GameInfoHolder.SoundOn = !GameInfoHolder.SoundOn;
-        _soundsImage.sprite = GameInfoHolder.SoundOn ? _soundsOn : _soundsOff;
+        SaveLoadSystem.data.SoundsOn = !SaveLoadSystem.data.SoundsOn;
+        SaveLoadSystem.Instance.Save();
+        _soundsImage.sprite = SaveLoadSystem.data.SoundsOn ? _soundsOn : _soundsOff;
         EventBus.OnSoundsToggle?.Invoke();
     }
 }

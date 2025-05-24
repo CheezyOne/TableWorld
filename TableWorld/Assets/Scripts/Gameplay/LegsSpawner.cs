@@ -11,7 +11,12 @@ public class LegsSpawner : MonoBehaviour
 
     private void Awake()
     {
-        int legsNumber = _minimumLegsPairs + (GameInfoHolder.Level / _levelsForLegPair);
+        int legsNumber = 0;
+
+        if (SaveLoadSystem.data.Level > 0)
+            legsNumber++;
+
+        legsNumber += _minimumLegsPairs + (SaveLoadSystem.data.Level / _levelsForLegPair);
         legsNumber = Mathf.Clamp(legsNumber, _minimumLegsPairs, _legsPositions.Count);
 
         for(int i = 0;i<legsNumber;i++)

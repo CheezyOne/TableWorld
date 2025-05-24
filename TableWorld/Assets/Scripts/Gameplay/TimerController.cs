@@ -7,7 +7,6 @@ public class TimerController : Singleton<TimerController>
 {
     [SerializeField] private ArmSpawner _armSpawner;
     [SerializeField] private TMP_Text _timerText;
-    [SerializeField] private string _runToHandText;
     [SerializeField] private float _timerScaleMultiplier;
     [SerializeField] private float _timerScaleTime;
     [SerializeField] private float _firstLevelTime;
@@ -16,12 +15,14 @@ public class TimerController : Singleton<TimerController>
     private float _timeLeft;
     private bool _isPlaying;
 
+    private const string RUN_TO_HAND_KEY = "run_to_hand";
+
     public float TimeLeft => _timeLeft;
 
     protected override void Awake()
     {
         base.Awake();
-        StartTimer(_firstLevelTime + GameInfoHolder.Level * _levelEncreaseTime);
+        StartTimer(_firstLevelTime + SaveLoadSystem.data.Level * _levelEncreaseTime);
     }
 
     private void StartTimer(float time)
@@ -32,7 +33,7 @@ public class TimerController : Singleton<TimerController>
 
     public float GetPassedTime()
     {
-        return _firstLevelTime + GameInfoHolder.Level * _levelEncreaseTime - _timeLeft;
+        return _firstLevelTime + SaveLoadSystem.data.Level * _levelEncreaseTime - _timeLeft;
     }
 
     private void Update()
@@ -48,7 +49,7 @@ public class TimerController : Singleton<TimerController>
         {
             _armSpawner.SpawnArm();
             _isPlaying = false;
-            _timerText.text = _runToHandText;
+            _timerText.text = LanguageSystem.Instance.GetTranslatedText(RUN_TO_HAND_KEY);
             _timerText.transform.DOScale(_timerScaleMultiplier, _timerScaleTime).SetLoops(-1, LoopType.Yoyo);
         }
     }

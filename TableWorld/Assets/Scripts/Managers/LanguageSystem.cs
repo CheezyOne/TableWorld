@@ -113,6 +113,7 @@ public class LanguageSystem : SingletonDontDestroyOnLoad<LanguageSystem>
         string translatedTxt = "";
 
         ArrayLanguageStruct language = _config.ArrayLanguages.FirstOrDefault(x => x.Key.Equals(key));
+
         if (language.Equals(default))
         {
             return "";
@@ -127,6 +128,23 @@ public class LanguageSystem : SingletonDontDestroyOnLoad<LanguageSystem>
         translatedTxt = translate.texts[id];
 
         return translatedTxt;
+    }
+
+    public string[] GetTranslatedArray(string key)
+    {
+        ArrayLanguageStruct language = _config.ArrayLanguages.FirstOrDefault(x => x.Key.Equals(key));
+        if (language.Equals(default))
+        {
+            return new string[0];
+        }
+
+        ArrayTranslateStruct translate = language.ArrayTranslates
+            .FirstOrDefault(x => x.SystemLanguage.ToString().Equals(GetGameLanguage));
+
+        if (translate.Equals(default))
+            return new string[0];
+
+        return translate.texts;
     }
 
     public string GetRandomTranslatedText(string key)

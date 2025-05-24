@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public class LanguageSetter : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class LanguageSetter : MonoBehaviour
         new TranslateStruct(AllLanguages.ru,""),
         new TranslateStruct(AllLanguages.en,"")
     };
-    [SerializeField] private Text text;
+    [SerializeField] private TMP_Text text;
 
     private void OnEnable()
     {
@@ -59,11 +59,7 @@ public class LanguageSetter : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (text != null)
-        {
-            text = GetComponent<Text>();
-        }
-
+        text = GetComponent<TMP_Text>();
         SetTranslate();
     }
 #endif

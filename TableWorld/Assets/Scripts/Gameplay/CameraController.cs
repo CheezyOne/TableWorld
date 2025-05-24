@@ -72,6 +72,12 @@ public class CameraController : MonoBehaviour
         transform.LookAt(_player.position + _originalOffset);
     }
 
+    public void SetOffset(Vector3 offset)
+    {
+        _offset = offset;
+        _originalOffset = offset;
+    }
+
     private void OnEnable()
     {
         EventBus.OnStomp += StartShake;

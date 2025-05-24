@@ -11,10 +11,29 @@ public class StartingSequence : MonoBehaviour
     [SerializeField] private Vector3 _cupForce;
     [SerializeField] private ConstantForce _forceComponent;
     [SerializeField] private string _playerTag;
+    [SerializeField] private NoTutorialWarningWindow _noTutorialWarningWindow;
+
+    private bool _isInAction;
+
+    public bool IsInAction => _isInAction;
 
     public void OnPlayButton()
     {
-        _arm.DOMove(_armTarget.position,_armMovementTime).SetEase(_armEase);
+        if(!SaveLoadSystem.data.IsTutorialComplete)
+        {
+            SaveLoadSystem.data.IsTutorialComplete = true;
+            SaveLoadSystem.Instance.Save();
+            WindowsManager.Instance.OpenWindow(_noTutorialWarningWindow);
+            return;
+        }
+
+        StartSequence();
+    }
+
+    private void StartSequence()
+    {
+        _isInAction = true;
+        _arm.DOMove(_armTarget.position, _armMovementTime).SetEase(_armEase);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +44,7 @@ public class StartingSequence : MonoBehaviour
 
     private void LoadScene()
     {
+        AdsManager.Instance.ShowInter();
         _loadScene.LoadTheScene();
     }
 
@@ -36,10 +56,12 @@ public class StartingSequence : MonoBehaviour
     private void OnEnable()
     {
         EventBus.OnMenuCupHit += ApplyCupForce;
+        EventBus.OnTutorialDecline += StartSequence;
     }
 
     private void OnDisable()
     {
         EventBus.OnMenuCupHit -= ApplyCupForce;
+        EventBus.OnTutorialDecline -= StartSequence;
     }
 }

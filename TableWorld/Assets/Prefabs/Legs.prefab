@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0622c90baee039044836308d226d0dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minBetweenStompsTime: 10
+  _minBetweenStompsTime: 5
   _maxBetweenStompsTime: 10
   _betweenStompsTimeReduction: 1
-  _absoluteLowestBetweenStompsTime: 10
+  _absoluteLowestBetweenStompsTime: 3
   _legs: {fileID: 5821666052216065676}
   _stompingPoint: {fileID: 2663993422588049228}
   _upperStompingPoint: {fileID: 4392241095159100287}

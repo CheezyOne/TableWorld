@@ -52,13 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 5875890008856011303}
-  _credits:
-  - 'Game design: Cheezy one'
-  - 'Scripts: Cheezy one'
-  - 'Sounds and music: Cheezy one'
-  - 'Animations: Bepis and Cheezy one'
-  - 'Ideas : Cheezy one and Bepis'
-  - '3D models: Bepis'
   _spawnPoint: {fileID: 9197010006485801473}
   _spawnDelay: 1.5
   _movingCredit: {fileID: 7414029264571711580, guid: 8effc0338feaa274a874b08f5fd14ef7, type: 3}
@@ -133,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.95686275, b: 0.44313726, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -259,6 +252,7 @@ GameObject:
   - component: {fileID: 4296328991749152058}
   - component: {fileID: 1300986322776047649}
   - component: {fileID: 3201990081125424121}
+  - component: {fileID: 8653959551539588938}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -283,7 +277,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1300986322776047649
 CanvasRenderer:
@@ -313,10 +307,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back to menu
+  m_text: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043C\u0435\u043D\u044E"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
+  m_sharedMaterial: {fileID: -8086153954775784357, guid: 6b2ecf89c6725c94d99f879f5535fc3c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -340,7 +334,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52.9
+  m_fontSize: 42
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -382,6 +376,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8653959551539588938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628751690205303107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11e4731120b11a14dabb9a554dfb49ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translates:
+  - SystemLanguage: 0
+    text: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043C\u0435\u043D\u044E"
+  - SystemLanguage: 1
+    text: Back to menu
+  text: {fileID: 3201990081125424121}
 --- !u!1 &7918204948214971559
 GameObject:
   m_ObjectHideFlags: 0

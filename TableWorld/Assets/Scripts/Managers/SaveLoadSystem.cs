@@ -152,11 +152,23 @@ public class SaveLoadSystem : SingletonDontDestroyOnLoad<SaveLoadSystem>
 public class PlayerData
 {
     public int SavesCount;
-    public int LevelIndex;
 
     public string LastSession = "";
 
     public bool SoundsOn = true;
-    public bool IsMatchTutorialComplete;
-    public bool IsRotationTutorialComplete;
+    public bool MusicOn = true;
+
+    public int Decoys = 10;
+    public int Level;
+
+    public bool IsTutorialComplete;
+
+    public float CurrentHP = 100f;
+
+    public void ResetData()
+    {
+        Level = 0;
+        CurrentHP = 100f;
+        Decoys = 10;
+    }
 }

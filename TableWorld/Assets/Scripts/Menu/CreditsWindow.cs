@@ -1,16 +1,15 @@
 using System.Collections;
 using UnityEngine;
-using System;
 
 public class CreditsWindow : BaseWindow
 {
-    [SerializeField] private string[] _credits;
-
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private MovingCredit _movingCredit;
 
     private int _creditIndex;
+
+    private const string CREDITS_KEY = "credits";
 
     public override void Init()
     {
@@ -22,7 +21,7 @@ public class CreditsWindow : BaseWindow
     {
         _creditIndex = 0;
 
-        while (_creditIndex < _credits.Length)
+        while (_creditIndex < LanguageSystem.Instance.GetTranslatedArray(CREDITS_KEY).Length)
         {
             SpawnCredit();
             _creditIndex++;
@@ -32,6 +31,6 @@ public class CreditsWindow : BaseWindow
 
     private void SpawnCredit()
     {
-        Instantiate(_movingCredit, _spawnPoint.position, Quaternion.identity, transform).SetText(_credits[_creditIndex]);
+        Instantiate(_movingCredit, _spawnPoint.position, Quaternion.identity, transform).SetText(LanguageSystem.Instance.GetTranslatedTextFromArrayByID(CREDITS_KEY, _creditIndex));
     }
 }

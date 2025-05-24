@@ -23,11 +23,12 @@ public class TrainMouse : Mouse
 
     private void TrainRun()
     {
-        transform.DOMove(transform.position + transform.forward * _distanceToTravel, _travelTime).OnComplete(() => Destroy(gameObject));
+        transform.DOMove(transform.position + transform.forward * _distanceToTravel, _travelTime).OnComplete(() => Destroy(gameObject)).SetEase(Ease.Linear);
     }
 
     public override void GetStunned()
     {
+        base.GetStunned();
         transform.DOKill();
         StunRotate();
         _rightTrailEmission.rateOverTime = 0;
@@ -37,6 +38,7 @@ public class TrainMouse : Mouse
 
     public override void OnStunEnd()
     {
+        base.OnStunEnd();
         _rightTrailEmission.rateOverTime = _standartDustEmission;
         _leftTrailEmission.rateOverTime = _standartDustEmission;
         _animator.enabled = true;

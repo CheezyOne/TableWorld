@@ -5,8 +5,9 @@ public class BannerAdCanvasMover : MonoBehaviour
 {
     [SerializeField] private RootData[] _rootDatas;
 
-    [SerializeField] private Transform _sceneCamera;
-    [SerializeField] private float _cameraYOffset;
+    [SerializeField] private CameraController _sceneCamera;
+    [SerializeField] private Vector3 _cameraOffset;
+    [SerializeField] private Vector3 _cameraNormalOffset;  
 
     private void Start()
     {
@@ -16,10 +17,10 @@ public class BannerAdCanvasMover : MonoBehaviour
 
     private void MoveRootUp()
     {
-        if(_sceneCamera != null)
-            _sceneCamera.position = new Vector3(_sceneCamera.position.x, _sceneCamera.position.y - _cameraYOffset, _sceneCamera.position.z);
+        if (_sceneCamera != null)
+            _sceneCamera.SetOffset(_cameraOffset);
 
-        foreach(RootData rootData in _rootDatas)
+        foreach (RootData rootData in _rootDatas)
         {
             rootData.Root.offsetMin = new Vector2(rootData.Root.offsetMin.x, rootData.RootYOffset);
         }
@@ -28,7 +29,7 @@ public class BannerAdCanvasMover : MonoBehaviour
     private void MoveRootDown()
     {
         if(_sceneCamera!=null)
-            _sceneCamera.position = new Vector3(_sceneCamera.position.x, _sceneCamera.position.y + _cameraYOffset, _sceneCamera.position.z);
+            _sceneCamera.SetOffset(_cameraNormalOffset);
 
         foreach (RootData rootData in _rootDatas)
         {
@@ -39,11 +40,13 @@ public class BannerAdCanvasMover : MonoBehaviour
     private void OnEnable()
     {
         EventBus.OnBannerAdShown += MoveRootUp;
+        EventBus.OnBannerAdHidden += MoveRootDown;
     }
 
     private void OnDisable()
     {   
         EventBus.OnBannerAdShown -= MoveRootUp;
+        EventBus.OnBannerAdHidden -= MoveRootDown;
     }
 }
 

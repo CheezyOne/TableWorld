@@ -14,17 +14,18 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        _healthBar.transform.localScale = new(GameInfoHolder.CurrentHP / MAX_HEALTH, 1, 1);
+        _healthBar.transform.localScale = new(SaveLoadSystem.data.CurrentHP / MAX_HEALTH, 1, 1);
     }
 
     public void GetHealed(float health)
     {
-        GameInfoHolder.CurrentHP += health;
+        SaveLoadSystem.data.CurrentHP += health;
+        SaveLoadSystem.Instance.Save();
 
-        if(GameInfoHolder.CurrentHP > MAX_HEALTH)
-            GameInfoHolder.CurrentHP = MAX_HEALTH;
+        if(SaveLoadSystem.data.CurrentHP > MAX_HEALTH)
+            SaveLoadSystem.data.CurrentHP = MAX_HEALTH;
 
-        _healthBar.transform.localScale = new(GameInfoHolder.CurrentHP / MAX_HEALTH, 1, 1);
+        _healthBar.transform.localScale = new(SaveLoadSystem.data.CurrentHP / MAX_HEALTH, 1, 1);
     }
 
     public void TakeDamage(float damage)
@@ -32,10 +33,11 @@ public class PlayerHealth : MonoBehaviour
         if (_isInvincible)
             return;
 
-        GameInfoHolder.CurrentHP -= damage;
-        _healthBar.transform.localScale = new(GameInfoHolder.CurrentHP / MAX_HEALTH, 1,1);
+        SaveLoadSystem.data.CurrentHP -= damage;
+        SaveLoadSystem.Instance.Save();
+        _healthBar.transform.localScale = new(SaveLoadSystem.data.CurrentHP / MAX_HEALTH, 1,1);
 
-        if (GameInfoHolder.CurrentHP <= 0)
+        if (SaveLoadSystem.data.CurrentHP <= 0)
             Die();
     }
 
@@ -45,7 +47,8 @@ public class PlayerHealth : MonoBehaviour
         SoundsManager.Instance.PlaySound(SoundType.CupBreak);
         WindowsManager.Instance.OpenWindow(_loseWindow);
         gameObject.SetActive(false);
-        GameInfoHolder.ResetData();
+        SaveLoadSystem.data.ResetData();
+        SaveLoadSystem.Instance.Save();
     }
 
     private void BecameInvinsible() => _isInvincible = true;

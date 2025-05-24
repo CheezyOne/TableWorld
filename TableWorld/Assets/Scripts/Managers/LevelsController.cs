@@ -13,7 +13,9 @@ public class LevelsController : Singleton<LevelsController>
         Debug.Log("Level ended");
 #endif
 
-        GameInfoHolder.Level++;
+        SoundsManager.Instance.PlaySound(SoundType.Victory);
+        SaveLoadSystem.data.Level++;
+        SaveLoadSystem.Instance.Save();
         WindowsManager.Instance.OpenWindow(_levelEndWindow);
         EventBus.OnGameEnd?.Invoke();
     }
@@ -21,16 +23,5 @@ public class LevelsController : Singleton<LevelsController>
 
 public static class GameInfoHolder
 {
-    public static int Decoys = 10;
-    public static int Level;
-    public static float CurrentHP = 100f;
-    public static bool SoundOn = true;
-    public static bool MusicOn = true;
 
-    public static void ResetData()
-    {
-        Decoys = 10;
-        Level = 0;
-        CurrentHP = 100f;
-    }
 }

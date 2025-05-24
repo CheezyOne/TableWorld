@@ -46,7 +46,7 @@ public class Legs : MonoBehaviour
 
     private float GetBetweenStompsTime()
     {
-        float reductedTime = _maxBetweenStompsTime - _betweenStompsTimeReduction * GameInfoHolder.Level;
+        float reductedTime = _maxBetweenStompsTime - _betweenStompsTimeReduction * SaveLoadSystem.data.Level;
         float betweenStompsTime = reductedTime<_minBetweenStompsTime?Random.Range(_absoluteLowestBetweenStompsTime, _minBetweenStompsTime) : Random.Range(_minBetweenStompsTime, reductedTime);
         return betweenStompsTime;
     }

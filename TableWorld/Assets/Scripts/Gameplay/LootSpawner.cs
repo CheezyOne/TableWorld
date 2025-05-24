@@ -19,7 +19,7 @@ public class LootSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_initialSpawnTime + GameInfoHolder.Level * _increaseSpawnTime);
+            yield return new WaitForSeconds(_initialSpawnTime + SaveLoadSystem.data.Level * _increaseSpawnTime);
             Vector3 newLootPosition = new(_mapCenter.position.x + Random.Range(-_spawnRadius, _spawnRadius), _mapCenter.position.y, _mapCenter.position.z + Random.Range(-_spawnRadius, _spawnRadius));
 
             if (Random.Range(0, 100) >= 50)

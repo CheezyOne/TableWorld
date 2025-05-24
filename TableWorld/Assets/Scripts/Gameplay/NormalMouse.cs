@@ -14,18 +14,21 @@ public class NormalMouse : Mouse
 
     private Transform _player;
     private Transform _currentTarget;
-    private bool _isStunned;
     private bool _isResting;
+    private bool _isEating;
     private Coroutine _targetPlayerRoutine;
+    private Coroutine _restingRoutine;
+
+    public bool IsEating => _isEating;
 
     private void Awake()
     {
-        StartCoroutine(GetRandomTargetRoutine());
+        _restingRoutine = StartCoroutine(RestingRoutine());
     }
 
     private void Update()
     {
-        if (_currentTarget == null || _isStunned || _isResting)
+        if (_currentTarget == null || _isStunned)
         {
             if(_agent.isActiveAndEnabled)
                 _agent.isStopped = true;
@@ -34,10 +37,14 @@ public class NormalMouse : Mouse
         }
 
         _agent.isStopped = false;
+        
+        if (_isResting)
+            return;
+
         _agent.destination = _currentTarget.position;
     }
 
-    private IEnumerator GetRandomTargetRoutine()
+    private IEnumerator RestingRoutine()
     {
         while (true)
         {
@@ -59,44 +66,48 @@ public class NormalMouse : Mouse
         _currentTarget = _player;
     }
 
-    public void SetTemporalTarget(Transform target)
+    public void SetDecoyTarget(Transform target)
     {
         if (_currentTarget != _player)
             Destroy(_currentTarget.gameObject);
 
         if(_isResting)
         {
-            Destroy(target.gameObject);
-            return;
+            _currentTarget = _player;
+            _isResting = false;
         }
 
+        StopCoroutine(_restingRoutine);
         _currentTarget = target;
+        _isEating = true;
 
         if (_targetPlayerRoutine != null)
             StopCoroutine(_targetPlayerRoutine);
 
-        _targetPlayerRoutine = StartCoroutine(ResetToTargetPlayer());
+        _targetPlayerRoutine = StartCoroutine(TargetPlayerRoutine());
     }
 
-    private IEnumerator ResetToTargetPlayer()
+    private IEnumerator TargetPlayerRoutine()
     {
         yield return new WaitForSeconds(_targetPlayerTime);
+        _restingRoutine = StartCoroutine(RestingRoutine());
+        _isEating = false;
         Destroy(_currentTarget.gameObject);
         _currentTarget = _player;
     }
 
     public override void GetStunned()
     {
+        base.GetStunned();
         _animator.enabled = false;
-        _isStunned = true;
         _agent.enabled = false;
         StunRotate();
     }
 
     public override void OnStunEnd()
     {
+        base.OnStunEnd();
         _animator.enabled = true;
         _agent.enabled = true;
-        _isStunned = false;
     }
 }

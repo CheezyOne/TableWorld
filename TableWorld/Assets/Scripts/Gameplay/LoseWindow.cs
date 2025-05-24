@@ -4,18 +4,21 @@ using TMPro;
 public class LoseWindow : BaseWindow
 {
     [SerializeField] private TMP_Text _scoreText;
-    [SerializeField] private string _score;
     [SerializeField] private int _levelScoreMultiplier;
+
+    private const string SCORE_KEY = "score";
 
     public override void Init()
     {
         base.Init();
-        _scoreText.text = _score + GetFinalScore();
+        int score = GetFinalScore();
+        _scoreText.text = LanguageSystem.Instance.GetTranslatedText(SCORE_KEY) + score;
+        LeaderboardHandler.Instance.SubmitScore(score);
     }
 
-    private string GetFinalScore()
+    private int GetFinalScore()
     {
-        string score = (GameInfoHolder.Level * _levelScoreMultiplier + (int)TimerController.Instance.GetPassedTime()).ToString();
+        int score = SaveLoadSystem.data.Level * _levelScoreMultiplier + (int)TimerController.Instance.GetPassedTime();
         return score;
     }
 }

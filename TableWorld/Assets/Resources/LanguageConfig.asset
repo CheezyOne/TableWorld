@@ -13,5 +13,90 @@ MonoBehaviour:
   m_Name: LanguageConfig
   m_EditorClassIdentifier: 
   _targetLanguage: 0
-  _languages: []
-  _arrayLanguages: []
+  _languages:
+  - Key: run_to_hand
+    Translates:
+    - SystemLanguage: 0
+      text: "\u0421\u041A\u041E\u0420\u0415\u0415! \u041D\u0410\u0419\u0414\u0418
+        \u0420\u0423\u041A\u0423!"
+    - SystemLanguage: 1
+      text: FIND A HAND!
+  - Key: score
+    Translates:
+    - SystemLanguage: 0
+      text: "\u041E\u0447\u043A\u0438:"
+    - SystemLanguage: 1
+      text: 'Score:'
+  _arrayLanguages:
+  - Key: credits
+    ArrayTranslates:
+    - SystemLanguage: 0
+      texts:
+      - "\u0413\u0435\u0439\u043C\u0434\u0438\u0437\u0430\u0439\u043D: Cheezy One"
+      - "\u0421\u043A\u0440\u0438\u043F\u0442\u044B \u0438 \u043C\u0435\u0445\u0430\u043D\u0438\u043A\u0438:
+        Cheezy One"
+      - "\u041C\u0443\u0437\u044B\u043A\u0430 \u0438 \u0437\u0432\u0443\u043A\u0438:
+        Cheezy One"
+      - "\u0410\u043D\u0438\u043C\u0430\u0446\u0438\u0438: Cheezy One \u0438 Bepis"
+      - "\u0418\u0434\u0435\u0438: Cheezy One \u0438 Bepis"
+      - "3\u0414 \u043C\u043E\u0434\u0435\u043B\u0438: Bepis"
+    - SystemLanguage: 1
+      texts:
+      - 'Game design: Cheezy One'
+      - 'Scripts: Cheezy One'
+      - 'Sounds and music: Cheezy One'
+      - 'Animations: Bepis and Cheezy One'
+      - 'Ideas : Cheezy One and Bepis'
+      - '3D models: Bepis'
+  - Key: tutorials
+    ArrayTranslates:
+    - SystemLanguage: 0
+      texts:
+      - "\u0418\u0437\u0431\u0435\u0433\u0430\u0439 \u043C\u044B\u0448\u0435\u0439
+        \u0438 \u043C\u044B\u0448\u0435\u043B\u043E\u0432\u043E\u043A!"
+      - "\u041A\u043E\u0433\u0434\u0430 \u0442\u0430\u0439\u043C\u0435\u0440 \u0434\u043E\u0439\u0434\u0451\u0442
+        \u0434\u043E 0 - \u0431\u0435\u0433\u0438 \u043A \u0440\u0443\u043A\u0435
+        \u0434\u043B\u044F \u043F\u0435\u0440\u0435\u0445\u043E\u0434\u0430 \u043D\u0430
+        \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C!"
+      - "\u0423\u0440\u043E\u0432\u043D\u0438 \u0441\u0442\u0430\u043D\u0443\u0442
+        \u0432\u0441\u0451 \u0441\u043B\u043E\u0436\u043D\u0435\u0435 \u0438 \u043F\u0440\u0438\u0432\u043D\u0435\u0441\u0443\u0442
+        \u0441\u044E\u0440\u043F\u0440\u0438\u0437\u044B!"
+      - "\u041A\u0430\u043F\u043B\u0438 \u0432\u043E\u0434\u044B \u0442\u0435\u0431\u044F
+        \u043B\u0435\u0447\u0430\u0442!"
+      - "\u041E\u0442\u0432\u043B\u0435\u043A\u0430\u0439 \u043C\u044B\u0448\u0435\u0439
+        \u043A\u0440\u043E\u0448\u043A\u0430\u043C\u0438!"
+      - "\u0415\u0441\u043B\u0438 \u043D\u043E\u0433\u0438 \u0443\u0434\u0430\u0440\u044F\u0442
+        \u043E\u0431 \u043F\u043E\u043B - \u043F\u0435\u0440\u0435\u043F\u0440\u044B\u0433\u0438\u0432\u0430\u0439
+        \u0443\u0434\u0430\u0440\u043D\u0443\u044E \u0432\u043E\u043B\u043D\u0443!"
+      - "\u041F\u044F\u0442\u043D\u0430 \u043D\u0430\u043D\u043E\u0441\u044F\u0442
+        \u0443\u0440\u043E\u043D \u0438 \u0437\u0430\u043C\u0435\u0434\u043B\u044F\u044E\u0442
+        \u0442\u0435\u0431\u044F!"
+    - SystemLanguage: 1
+      texts:
+      - Avoid hitting mice or mousetraps.
+      - When timer hits 0 you should fine a hand to get to next level.
+      - Levels are going to be harder and have more surprises!
+      - Water drops will heal you.
+      - Distract mice with decoys.
+      - When a human stomps - jump over the shockwave.
+      - Dirty spots will damage and slow you down.
+  - Key: tutorials_URLs
+    ArrayTranslates:
+    - SystemLanguage: 0
+      texts:
+      - https://cheezyone.github.io/MiceTutorial.webm
+      - https://cheezyone.github.io/MiceTutorial.webm
+      - https://cheezyone.github.io/SurprisesTutorialRu.webm
+      - https://cheezyone.github.io/WaterDropTutorial.webm
+      - https://cheezyone.github.io/DecoyTutorial.webm
+      - https://cheezyone.github.io/LegsTutorial.webm
+      - https://cheezyone.github.io/DirtySpotTutorial.webm
+    - SystemLanguage: 1
+      texts:
+      - https://cheezyone.github.io/MiceTutorial.webm
+      - https://cheezyone.github.io/MiceTutorial.webm
+      - https://cheezyone.github.io/SurprisesTutorialEn.webm
+      - https://cheezyone.github.io/WaterDropTutorial.webm
+      - https://cheezyone.github.io/DecoyTutorial.webm
+      - https://cheezyone.github.io/LegsTutorial.webm
+      - https://cheezyone.github.io/DirtySpotTutorial.webm

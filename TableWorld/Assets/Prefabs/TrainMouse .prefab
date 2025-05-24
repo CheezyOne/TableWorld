@@ -9821,7 +9821,7 @@ MonoBehaviour:
   _stunRotationTime: 0.5
   _stunRotation: {x: 0, y: 0, z: 90}
   _animator: {fileID: 1787825102648176983}
-  _travelTime: 8
+  _travelTime: 6.5
   _distanceToTravel: 50
   _rightTrail: {fileID: 7867053535397704105}
   _leftTrail: {fileID: 1827757559553751136}

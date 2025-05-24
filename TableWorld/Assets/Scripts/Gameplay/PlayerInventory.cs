@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Awake()
     {
-        _decoyAmountText.text = GameInfoHolder.Decoys.ToString();
+        _decoyAmountText.text = SaveLoadSystem.data.Decoys.ToString();
     }
 
     private void Update()
@@ -21,18 +21,21 @@ public class PlayerInventory : MonoBehaviour
 
     private void ThrowDecoy()
     {
-        if (GameInfoHolder.Decoys <= 0)
+        if (SaveLoadSystem.data.Decoys <= 0)
             return;
 
-        GameInfoHolder.Decoys--;
-        _decoyAmountText.text = GameInfoHolder.Decoys.ToString();
+        SaveLoadSystem.data.Decoys--;
+        SaveLoadSystem.Instance.Save();
+        _decoyAmountText.text = SaveLoadSystem.data.Decoys.ToString();
         Decoy newDecoy = Instantiate(_decoy, transform.position + _playerCamera.forward, Quaternion.identity);
         newDecoy.Rigidbody.AddForce((_playerCamera.forward + _playerCamera.up / 2) * _decoyThrowForce, ForceMode.Impulse);
+        SoundsManager.Instance.PlaySound(SoundType.DecoyThrow);
     }
 
     public void AddDecoy()
     {
-        GameInfoHolder.Decoys++;
-        _decoyAmountText.text = GameInfoHolder.Decoys.ToString();
+        SaveLoadSystem.data.Decoys++;
+        SaveLoadSystem.Instance.Save();
+        _decoyAmountText.text = SaveLoadSystem.data.Decoys.ToString();
     }
 }

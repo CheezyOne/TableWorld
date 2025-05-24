@@ -21,7 +21,7 @@ public class DirtySpotsSpawner : MonoBehaviour
     {
         while (true)
         {
-            float spawnTime = _initialSpawnTime - GameInfoHolder.Level * _decreaseSpawnTime;
+            float spawnTime = _initialSpawnTime - SaveLoadSystem.data.Level * _decreaseSpawnTime;
 
             if (spawnTime < _absoluteMinimumTime)
                 spawnTime = _absoluteMinimumTime;

@@ -10,8 +10,15 @@ public class Mouse : MonoBehaviour
     [SerializeField] private float _stunRotationTime;
     [SerializeField] private Vector3 _stunRotation;
 
+    protected bool _isStunned;
+
+    public bool IsStunned => _isStunned;
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (_isStunned) 
+            return;
+
         if (collision.transform.TryGetComponent(out PlayerHealth playerHealth))
         {
             playerHealth.TakeDamage(_damage);
@@ -30,8 +37,12 @@ public class Mouse : MonoBehaviour
     }
 
     public virtual void OnStunEnd()
-    { }
+    {
+        _isStunned = false;
+    }
 
     public virtual void GetStunned()
-    { }
+    {
+        _isStunned = true;
+    }
 }

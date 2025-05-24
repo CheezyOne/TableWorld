@@ -24,7 +24,7 @@ public class MiceSpawner : MonoBehaviour
 
     private void SpawnNormalMice()
     {
-        int miceAmount = 1 + (GameInfoHolder.Level / _levelsForNormalMouse);
+        int miceAmount = 1 + (SaveLoadSystem.data.Level / _levelsForNormalMouse);
 
         for(int i = 0;i<miceAmount;i++)
         {
@@ -46,7 +46,7 @@ public class MiceSpawner : MonoBehaviour
 
     private float GetBetweenMiceTime()
     {
-        float reductedTime = _maxTrainMiceTime - _trainMiceTimeReduction * GameInfoHolder.Level;
+        float reductedTime = _maxTrainMiceTime - _trainMiceTimeReduction * SaveLoadSystem.data.Level;
         float betweenStompsTime = reductedTime < _minTrainMiceTime ? Random.Range(_absoluteLowestTrainMiceTime, _minTrainMiceTime) : Random.Range(_minTrainMiceTime, reductedTime);
         return betweenStompsTime;
     }
