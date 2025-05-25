@@ -162,6 +162,7 @@ public class PlayerData
     public int Level;
 
     public bool IsTutorialComplete;
+    public bool DiedOnce;
 
     public float CurrentHP = 100f;
 

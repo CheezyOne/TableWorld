@@ -22,6 +22,7 @@ public class StartingSequence : MonoBehaviour
         if(!SaveLoadSystem.data.IsTutorialComplete)
         {
             SaveLoadSystem.data.IsTutorialComplete = true;
+            GameAnalytics.TrackEvent("have_not_seen_tutorial");
             SaveLoadSystem.Instance.Save();
             WindowsManager.Instance.OpenWindow(_noTutorialWarningWindow);
             return;
@@ -44,6 +45,11 @@ public class StartingSequence : MonoBehaviour
 
     private void LoadScene()
     {
+        GameAnalytics.TrackEvent("game_start");
+
+        if(SaveLoadSystem.data.DiedOnce)
+            GameAnalytics.TrackEvent("second_start");
+
         AdsManager.Instance.ShowInter();
         _loadScene.LoadTheScene();
     }
