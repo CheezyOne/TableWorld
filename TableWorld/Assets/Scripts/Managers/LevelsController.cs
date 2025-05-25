@@ -13,15 +13,17 @@ public class LevelsController : Singleton<LevelsController>
         Debug.Log("Level ended");
 #endif
 
+        if (SaveLoadSystem.data.Level == 0)
+            GameAnalytics.TrackEvent("first_level_complete");
+        else if (SaveLoadSystem.data.Level == 1)
+            GameAnalytics.TrackEvent("second_level_complete");
+        else if (SaveLoadSystem.data.Level == 2)
+            GameAnalytics.TrackEvent("third_level_complete");
+
         SoundsManager.Instance.PlaySound(SoundType.Victory);
         SaveLoadSystem.data.Level++;
         SaveLoadSystem.Instance.Save();
         WindowsManager.Instance.OpenWindow(_levelEndWindow);
         EventBus.OnGameEnd?.Invoke();
     }
-}
-
-public static class GameInfoHolder
-{
-
 }

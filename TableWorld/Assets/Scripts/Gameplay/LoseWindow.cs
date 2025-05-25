@@ -14,6 +14,8 @@ public class LoseWindow : BaseWindow
         int score = GetFinalScore();
         _scoreText.text = LanguageSystem.Instance.GetTranslatedText(SCORE_KEY) + score;
         LeaderboardHandler.Instance.SubmitScore(score);
+        SaveLoadSystem.data.DiedOnce = true;
+        SaveLoadSystem.Instance.Save();
     }
 
     private int GetFinalScore()

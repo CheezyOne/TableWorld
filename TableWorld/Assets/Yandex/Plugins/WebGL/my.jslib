@@ -8,6 +8,18 @@ GetLang : function(){
   return buffer;
 },
 
+    SendAnalyticsEvent: function(eventName, eventData) {
+        if (typeof YaGames !== 'undefined') {
+            var name = UTF8ToString(eventName);
+            var data = eventData ? JSON.parse(UTF8ToString(eventData)) : null;
+            
+            YaGames.init().then(ysdk => {
+                ysdk.analytics.reachGoal(name, data || {});
+                console.log("Event sent:", name, data);
+            });
+        }
+    }
+
     SubmitLeaderboardScore: function(score) {
         if (typeof YaGames !== 'undefined') {
             YaGames.init().then(ysdk => {
