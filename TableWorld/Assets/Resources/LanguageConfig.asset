@@ -84,19 +84,19 @@ MonoBehaviour:
     ArrayTranslates:
     - SystemLanguage: 0
       texts:
-      - https://cheezyone.github.io/MiceTutorial.webm
-      - https://cheezyone.github.io/MiceTutorial.webm
-      - https://cheezyone.github.io/SurprisesTutorialRu.webm
-      - https://cheezyone.github.io/WaterDropTutorial.webm
-      - https://cheezyone.github.io/DecoyTutorial.webm
-      - https://cheezyone.github.io/LegsTutorial.webm
-      - https://cheezyone.github.io/DirtySpotTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/MiceTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/LevelEndRu.mp4
+      - https://storage.yandexcloud.net/table-videos/SurprisesTutorialRu.webm
+      - https://storage.yandexcloud.net/table-videos/WaterDropTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/DecoyTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/LegsTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/DirtySpotTutorial.webm
     - SystemLanguage: 1
       texts:
-      - https://cheezyone.github.io/MiceTutorial.webm
-      - https://cheezyone.github.io/MiceTutorial.webm
-      - https://cheezyone.github.io/SurprisesTutorialEn.webm
-      - https://cheezyone.github.io/WaterDropTutorial.webm
-      - https://cheezyone.github.io/DecoyTutorial.webm
-      - https://cheezyone.github.io/LegsTutorial.webm
-      - https://cheezyone.github.io/DirtySpotTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/MiceTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/LevelEndEn.mp4
+      - https://storage.yandexcloud.net/table-videos/SurprisesTutorialEn.webm
+      - https://storage.yandexcloud.net/table-videos/WaterDropTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/DecoyTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/LegsTutorial.webm
+      - https://storage.yandexcloud.net/table-videos/DirtySpotTutorial.webm

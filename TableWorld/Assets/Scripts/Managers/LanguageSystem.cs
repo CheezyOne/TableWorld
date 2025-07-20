@@ -29,8 +29,6 @@ public class LanguageSystem : SingletonDontDestroyOnLoad<LanguageSystem>
         }
     }
 
-    public static Action OnLanguageSetted;
-
     public LanguageConfig Config => _config;
 
     public const string DEFAULT_LANGUAGE = "ru";
@@ -83,7 +81,7 @@ public class LanguageSystem : SingletonDontDestroyOnLoad<LanguageSystem>
             }
         }
 
-        OnLanguageSetted?.Invoke();
+        EventBus.OnLanguageSet?.Invoke();
     }
 
     public string GetTranslatedText(string key)

@@ -14,12 +14,12 @@ public class LanguageSetter : MonoBehaviour
 
     private void OnEnable()
     {
-        LanguageSystem.OnLanguageSetted += SetTranslate;
+        EventBus.OnLanguageSet += SetTranslate;
     }
 
     private void OnDisable()
     {
-        LanguageSystem.OnLanguageSetted -= SetTranslate;
+        EventBus.OnLanguageSet -= SetTranslate;
     }
 
     private void Start()

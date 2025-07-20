@@ -2,6 +2,8 @@ using System;
 
 public static class EventBus
 {
+    public static Action OnLanguageSet;
+
     public static Action OnBannerAdShown;
     public static Action OnBannerAdHidden;
 

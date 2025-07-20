@@ -13,12 +13,21 @@ public class LevelsController : Singleton<LevelsController>
         Debug.Log("Level ended");
 #endif
 
-        if (SaveLoadSystem.data.Level == 0)
-            GameAnalytics.TrackEvent("first_level_complete");
-        else if (SaveLoadSystem.data.Level == 1)
-            GameAnalytics.TrackEvent("second_level_complete");
-        else if (SaveLoadSystem.data.Level == 2)
-            GameAnalytics.TrackEvent("third_level_complete");
+        if (SaveLoadSystem.data.Level == 0 && !SaveLoadSystem.data.IsFirstLevelComplete)
+        {
+            GameAnalytics.Instance.TrackEvent("first_level_complete");
+            SaveLoadSystem.data.IsFirstLevelComplete = true;
+        }
+        else if (SaveLoadSystem.data.Level == 1 && !SaveLoadSystem.data.IsSecondLevelComplete)
+        {
+            GameAnalytics.Instance.TrackEvent("second_level_complete");
+            SaveLoadSystem.data.IsSecondLevelComplete = true;
+        }
+        else if (SaveLoadSystem.data.Level == 2 && !SaveLoadSystem.data.IsThirdLevelComplete)
+        {
+            GameAnalytics.Instance.TrackEvent("third_level_complete");
+            SaveLoadSystem.data.IsThirdLevelComplete = true;
+        }
 
         SoundsManager.Instance.PlaySound(SoundType.Victory);
         SaveLoadSystem.data.Level++;

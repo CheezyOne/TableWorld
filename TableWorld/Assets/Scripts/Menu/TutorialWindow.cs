@@ -27,9 +27,13 @@ public class TutorialWindow : BaseWindow
 
         if (_tutorialIndex >= _tutorialsCount)
         {
-            GameAnalytics.TrackEvent("seen_whole_tutorial");
-            SaveLoadSystem.data.IsTutorialComplete = true;
-            SaveLoadSystem.Instance.Save();
+            if (!SaveLoadSystem.data.IsTutorialComplete)
+            {
+                GameAnalytics.Instance.TrackEvent("seen_whole_tutorial");
+                SaveLoadSystem.data.IsTutorialComplete = true;
+                SaveLoadSystem.Instance.Save();
+            }
+
             _tutorialIndex = 0;
         }
 

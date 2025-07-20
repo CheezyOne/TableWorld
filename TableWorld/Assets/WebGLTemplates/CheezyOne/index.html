@@ -12,50 +12,50 @@
 
   </head>
   <body>
-    <div id="unity-container" style = "position: absolute; width: 100%; height: 100%; left: 0%; top: 0%;">
-      <canvas id="unity-canvas" style = "position: absolute; width: 100%; height: 100%;"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
+      <div id="unity-container" style="position: absolute; width: 100%; height: 100%; left: 0%; top: 0%;">
+          <canvas id="unity-canvas" style="position: absolute; width: 100%; height: 100%;"></canvas>
+          <div id="unity-loading-bar">
+              <div id="unity-logo"></div>
+              <div id="unity-progress-bar-empty">
+                  <div id="unity-progress-bar-full"></div>
+              </div>
+          </div>
+          <div id="unity-warning"> </div>
       </div>
-      <div id="unity-warning"> </div>
-    </div>
 
-    <script>
-      var player = null;
+      <script>
+          var player = null;
 
-      YaGames
-        .init()
-        .then(ysdk => {
-          console.log('Yandex SDK initialized');
-          window.ysdk = ysdk;
-          ysdk.getPlayer({ scopes: false }).then(_player => {
-              player = _player;
-              console.log('PLAYER initialized');
-          }).catch(err => {
-              // Ошибка при инициализации объекта Player.
-              console.log('PLAYER INIT ERROR.');
-          });
+          YaGames
+              .init()
+              .then(ysdk => {
+                  console.log('Yandex SDK initialized');
+                  window.ysdk = ysdk;
+                  ysdk.getPlayer({ scopes: false }).then(_player => {
+                      player = _player;
+                      console.log('PLAYER initialized');
+                  }).catch(err => {
+                      // Ошибка при инициализации объекта Player.
+                      console.log('PLAYER INIT ERROR.');
+                  });
 
-          ysdk.adv.showFullscreenAdv({
-            callbacks: {
-                onClose: function(wasShown) {
-                  // some action after close
-                  console.log('AD CLOSED');
-                  window.focus();
-                },
-                onError: function(error) {
-                  // some action on error
-                  console.log('AD ERROR');
-                }
-            }
-          });
-        });
-    </script>
+                  ysdk.adv.showFullscreenAdv({
+                      callbacks: {
+                          onClose: function (wasShown) {
+                              // some action after close
+                              console.log('AD CLOSED');
+                              window.focus();
+                          },
+                          onError: function (error) {
+                              // some action on error
+                              console.log('AD ERROR');
+                          }
+                      }
+                  });
+              });
+      </script>
 
-    <script>
+      <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       canvas.addEventListener("touchstart", function(){
@@ -165,6 +165,37 @@
               });
             };
       document.body.appendChild(script);
-    </script>
+      </script>
+      <script>
+          (function (m, e, t, r, i, k, a) {
+              m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+              m[i].l = 1 * new Date();
+              k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+          })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+          // Инициализация ВАШЕГО счётчика
+          ym(103375417, "init", {
+              clickmap: true,
+              trackLinks: true,
+              accurateTrackBounce: true,
+              webvisor: true,
+              childIframe: true  // Ключевой параметр!
+          });
+
+          // Инициализация счётчика Яндекс Игр (если нужен)
+          ym(49035923, "init", {
+              // Без дополнительных параметров
+          });
+      </script>
+      <noscript>
+          <div>
+              <img src="https://mc.yandex.ru/watch/103375417"
+                   style="position:absolute; left:-9999px;"
+                   alt="" />
+              <img src="https://mc.yandex.ru/watch/49035923"
+                   style="position:absolute; left:-9999px;"
+                   alt="" />
+          </div>
+      </noscript>
   </body>
 </html>

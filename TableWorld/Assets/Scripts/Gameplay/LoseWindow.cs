@@ -13,7 +13,7 @@ public class LoseWindow : BaseWindow
         base.Init();
         int score = GetFinalScore();
         _scoreText.text = LanguageSystem.Instance.GetTranslatedText(SCORE_KEY) + score;
-        LeaderboardHandler.Instance.SubmitScore(score);
+        LeaderboardHandler.Instance.SubmitScore(LeaderboardHandler.HIGH_SCORE_LEADERBOARD, score);
         SaveLoadSystem.data.DiedOnce = true;
         SaveLoadSystem.Instance.Save();
     }

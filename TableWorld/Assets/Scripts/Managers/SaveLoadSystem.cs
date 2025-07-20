@@ -163,6 +163,11 @@ public class PlayerData
 
     public bool IsTutorialComplete;
     public bool DiedOnce;
+    public bool HasStartedGame;
+    public bool HasStartedGameTwice;
+    public bool IsFirstLevelComplete;
+    public bool IsSecondLevelComplete;
+    public bool IsThirdLevelComplete;
 
     public float CurrentHP = 100f;
 
