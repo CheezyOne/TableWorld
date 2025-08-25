@@ -9,10 +9,6 @@ public class LevelsController : Singleton<LevelsController>
         if (WindowsManager.Instance.IsOpened(typeof(LevelEndWindow)))
             return;
 
-#if UNITY_EDITOR
-        Debug.Log("Level ended");
-#endif
-
         if (SaveLoadSystem.data.Level == 0 && !SaveLoadSystem.data.IsFirstLevelComplete)
         {
             GameAnalytics.Instance.TrackEvent("first_level_complete");

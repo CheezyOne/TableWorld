@@ -31,6 +31,8 @@ public class SoundsManager : SingletonDontDestroyOnLoad<SoundsManager>
     {
         foreach (SoundsData soundData in _soundsDatas)
             _soundIdPairs.Add(soundData.SoundType, soundData.AudioClipData);
+
+        _musicObject.gameObject.SetActive(SaveLoadSystem.data.MusicOn);
     }
 
     public void ToggleMusic()

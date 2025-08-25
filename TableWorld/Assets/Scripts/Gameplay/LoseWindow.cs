@@ -23,4 +23,9 @@ public class LoseWindow : BaseWindow
         int score = SaveLoadSystem.data.Level * _levelScoreMultiplier + (int)TimerController.Instance.GetPassedTime();
         return score;
     }
+
+    public void ShowInterAd()
+    {
+        AdsManager.Instance.ShowInter();
+    }
 }

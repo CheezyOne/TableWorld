@@ -12,6 +12,13 @@ public class LevelEndWindow : BaseWindow
     public override void Init()
     {
         base.Init();
-        _canvasGroup.DOFade(MAX_ALHPA, _appearTime).OnComplete(()=> _loadScene.LoadTheScene());
+        AdsManager.Instance.ShowInter();
+        _canvasGroup.DOFade(MAX_ALHPA, _appearTime).OnComplete(()=> OnCanvasAppear());
+    }
+
+    private void OnCanvasAppear()
+    {
+        AdsManager.Instance.ShowInter();
+        _loadScene.LoadTheScene();
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e31b4075be6b64587d6a974597d979, type: 3}
   m_Name: LanguageConfig
   m_EditorClassIdentifier: 
-  _targetLanguage: 0
+  _targetLanguage: 1
   _languages:
   - Key: run_to_hand
     Translates:

@@ -59,7 +59,6 @@ public class StartingSequence : MonoBehaviour
             SaveLoadSystem.Instance.Save();
         }
 
-        AdsManager.Instance.ShowInter();
         _loadScene.LoadTheScene();
     }
 
